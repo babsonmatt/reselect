@@ -4,8 +4,8 @@ export function createSelectorCreator(valueEquals) {
             selectors = [selectors];
         }
         const memoizedResultFunc = memoize(resultFunc, valueEquals);
-        return state => {
-            const params = selectors.map(selector => selector(state));
+        return (state, props) => {
+            const params = selectors.map(selector => selector(state, props));
             return memoizedResultFunc(params);
         }
     };
